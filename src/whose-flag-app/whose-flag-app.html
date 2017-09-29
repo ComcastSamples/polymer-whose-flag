@@ -61,10 +61,10 @@
         preload fade src="data/svg/BR.svg">
       </iron-image>
       <div id="answer-button-container">
-        <paper-button id="optionA" class="answer">Brazil</paper-button>
-        <paper-button id="optionB" class="answer">Uruguay</paper-button>
+        <paper-button id="optionA" class="answer" on-click="_selectAnswer">[[countryA]]</paper-button>
+        <paper-button id="optionB" class="answer" on-click="_selectAnswer">[[countryB]]</paper-button>
       </div>
-      <p>A message will go here, telling you if you got it right.</p>
+      <p>[[outputMessage]]</p>
       <paper-button class="another" id="another">Another!</paper-button>
     </div>
   </template>
@@ -78,8 +78,38 @@
       static get is() { return 'whose-flag-app'; }
       static get properties() {
         return {
-
+          countryA: {
+            type: String,
+            value: "Brazil"
+          },
+          countryB: {
+            type: String,
+            value: "Uruguay"
+          },
+          outputMessage: {
+            type: String,
+            value: ""
+          },
+          correctAnswer: {
+            type: String,
+            value: "Brazil"
+          },
+          userAnswer: {
+            type: String,
+            value: "Brazil"
+          }
         };
+      }
+
+      _selectAnswer(event) {
+        let clickedButton = event.target;
+        this.userAnswer = clickedButton.textContent;
+        if (this.userAnswer == this.correctAnswer) {
+          this.outputMessage = `${this.userAnswer} is correct!`;
+        }
+        else {
+          this.outputMessage = `Nope! The correct answer is ${this.correctAnswer}!`;
+        }
       }
     }
 
