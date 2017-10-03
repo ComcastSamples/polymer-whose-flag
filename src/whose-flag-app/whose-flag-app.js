@@ -1,4 +1,5 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
+import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 import '@polymer/app-layout/app-layout.js';
 import '@polymer/iron-image/iron-image.js';
 import '@polymer/paper-button/paper-button.js';
@@ -115,6 +116,13 @@ class WhoseFlagApp extends PolymerElement {
       },
       fullCountryList: Object
     };
+  }
+
+  ready() {
+    super.ready();
+    afterNextRender(this, () => {
+      this.removeAttribute('unresolved');
+    });
   }
 
   _computeImgSrc(correctAnswer) {

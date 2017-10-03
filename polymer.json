@@ -4,5 +4,19 @@
     "rules": [
       "polymer-3"
     ]
-  }
+  },
+  "entrypoint": "index.html",
+  "shell": "src/whose-flag-app/whose-flag-app.js",
+  "sources": [
+    "data/*",
+    "data/svg/*"
+  ],
+  "extraDependencies": [
+    "icons/*",
+    "manifest.json",
+    "node_modules/@webcomponents/webcomponentsjs/**"
+  ],
+  "builds": [
+    { "preset": "es6-bundled" }
+  ]
 }
