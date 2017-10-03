@@ -1,7 +1,19 @@
 {
+  "entrypoint": "index.html",
+  "shell": "src/whose-flag-app/whose-flag-app.html",
+  "sources": [
+    "data/*",
+    "data/svg/*"
+  ],
+  "extraDependencies": [
+    "icons/*",
+    "manifest.json",
+    "bower_components/webcomponentsjs/*"
+  ],
+  "builds": [
+    { "preset": "es6-bundled" }
+  ],
   "lint": {
-    "rules": [
-      "polymer-2"
-    ]
+    "rules": ["polymer-2"]
   }
 }

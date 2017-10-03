@@ -119,6 +119,13 @@
         };
       }
 
+      ready() {
+        super.ready();
+        Polymer.RenderStatus.afterNextRender(this, () => {
+          this.removeAttribute('unresolved');
+        });
+      }
+
       _computeImgSrc(correctAnswer) {
         if (correctAnswer && correctAnswer.code) {
           // Note: since this function will only run once this.correctAnswer is NOT undefined,

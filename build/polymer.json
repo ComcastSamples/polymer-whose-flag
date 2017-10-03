@@ -1,0 +1,44 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/whose-flag-app/whose-flag-app.html",
+  "fragments": [],
+  "sources": [
+    "data/*",
+    "data/svg/*",
+    "index.html",
+    "src/whose-flag-app/whose-flag-app.html"
+  ],
+  "extraDependencies": [
+    "bower_components/webcomponentsjs/*.js",
+    "icons/*",
+    "manifest.json",
+    "bower_components/webcomponentsjs/*"
+  ],
+  "builds": [
+    {
+      "name": "es6-bundled",
+      "browserCapabilities": [
+        "es2015"
+      ],
+      "js": {
+        "minify": true,
+        "compile": false
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "bundle": true,
+      "addServiceWorker": true,
+      "addPushManifest": true,
+      "preset": "es6-bundled"
+    }
+  ],
+  "lint": {
+    "rules": [
+      "polymer-2"
+    ]
+  }
+}
