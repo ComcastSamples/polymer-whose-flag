@@ -1,6 +1,6 @@
 Build a Polymer 2.0 App From Scratch Codelab
 ===
-See https://codelabs.developers.google.com/codelabs/whose-flag/ for codelab instructions.
+See https://comcastsamples.github.io/polymer-whose-flag/ for codelab instructions.
 
 Because conference Wi-Fi is unpredictable, it is recommended to follow these steps in advance of the start of the workshop to prepare your local environment for the Codelab:
 
