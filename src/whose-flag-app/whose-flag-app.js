@@ -24,6 +24,10 @@ class WhoseFlagApp extends PolymerElement {
           background: var(--paper-blue-500);
           width: 100%;
         }
+        paper-button:focus {
+          outline: 1px dashed var(--paper-purple-900);
+        }
+        paper-button:focus,
         paper-button.another:hover {
           background: var(--paper-light-blue-500);
         }
@@ -31,6 +35,10 @@ class WhoseFlagApp extends PolymerElement {
           background: var(--paper-purple-500);
           flex-grow: 1;
         }
+        paper-button.answer:focus {
+          outline-color: var(--paper-blue-900);
+        }
+        paper-button.answer:focus,
         paper-button.answer:hover {
           background: var(--paper-pink-500);
         }
