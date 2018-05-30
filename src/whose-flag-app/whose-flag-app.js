@@ -84,7 +84,7 @@ class WhoseFlagApp extends PolymerElement {
           <paper-button id="optionB" class="answer" on-click="_selectAnswer">[[countryB.name]]</paper-button>
         </div>
         <p>[[outputMessage]]</p>
-        <paper-button class="another" id="another" on-click="_restart">Another!</paper-button>
+        <paper-button class="another" id="another" on-click="_nextFlag">Another!</paper-button>
       </div>
     `;
   }
@@ -112,7 +112,8 @@ class WhoseFlagApp extends PolymerElement {
       },
       countryList: {
         type: Object
-      }
+      },
+      fullCountryList: Object
     };
   }
 
@@ -138,7 +139,15 @@ class WhoseFlagApp extends PolymerElement {
   }
 
   _handleResponse(event) {
+    this.fullCountryList = event.detail.response.countrycodes;
     this.countryList = event.detail.response.countrycodes;
+    this.__displayQuestion();
+  }
+
+  __displayQuestion() {
+    this.countryA = undefined;
+    this.countryB = undefined;
+    this.outputMessage = '';
     while (!this.countryA || !this.countryB || (this.countryA.code == this.countryB.code)){
       this.countryA = this.countryList[this.__getRandomCountry()];
       this.countryB = this.countryList[this.__getRandomCountry()];
@@ -146,11 +155,29 @@ class WhoseFlagApp extends PolymerElement {
     let coin = (Math.floor(Math.random() * 2));
     this.correctAnswer = coin == 1 ? this.countryA : this.countryB;
   }
+
   __getRandomCountry() {
     return Math.floor(Math.random() * (this.countryList.length));
   }
-  _restart() {
-    window.location.reload();
+
+  _nextFlag() {
+    this.countryList = this.__countriesWithout(this.correctAnswer);
+    if (this.countryList.length == 1) {
+      if (this.__allFlagsAsked()) {
+        this.countryList = this.fullCountryList;
+      } else {
+        this.countryList.push({"name": "Oceania"});
+      }
+    }
+    this.__displayQuestion();
+  }
+
+  __allFlagsAsked() {
+    return !this.countryA.code || !this.countryB.code;
+  }
+
+  __countriesWithout(countryToRemove) {
+    return this.countryList.filter(country => country.code !== countryToRemove.code);
   }
 }
 
