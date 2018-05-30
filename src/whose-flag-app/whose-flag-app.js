@@ -76,7 +76,7 @@ class WhoseFlagApp extends PolymerElement {
           <paper-button id="optionB" class="answer" on-click="_selectAnswer">[[countryB.name]]</paper-button>
         </div>
         <p>[[outputMessage]]</p>
-        <paper-button class="another" id="another">Another!</paper-button>
+        <paper-button class="another" id="another" on-click="_restart">Another!</paper-button>
       </div>
     `;
   }
@@ -117,9 +117,18 @@ class WhoseFlagApp extends PolymerElement {
 
   _handleResponse(event) {
     this.countryList = event.detail.response.countrycodes;
-    this.countryA = this.countryList[0];
-    this.countryB = this.countryList[1];
-    this.correctAnswer = this.countryA;
+    while (!this.countryA || !this.countryB || (this.countryA.code == this.countryB.code)){
+      this.countryA = this.countryList[this.__getRandomCountry()];
+      this.countryB = this.countryList[this.__getRandomCountry()];
+    }
+    let coin = (Math.floor(Math.random() * 2));
+    this.correctAnswer = coin == 1 ? this.countryA : this.countryB;
+  }
+  __getRandomCountry() {
+    return Math.floor(Math.random() * (this.countryList.length));
+  }
+  _restart() {
+    window.location.reload();
   }
 }
 
