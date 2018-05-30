@@ -77,8 +77,7 @@ class WhoseFlagApp extends PolymerElement {
       <div id="flag-image-container">
         <iron-image
           id="flag-image"
-          prevent-load
-          preload fade src="data/svg/[[correctAnswer.code]].svg">
+          preload fade src="[[imgSrc]]">
         </iron-image>
         <div id="answer-button-container">
           <paper-button id="optionA" class="answer" on-click="_selectAnswer">[[countryA.name]]</paper-button>
@@ -102,8 +101,11 @@ class WhoseFlagApp extends PolymerElement {
         value: ""
       },
       correctAnswer: {
-        type: Object,
-        observer: '_correctAnswerChanged'
+        type: Object
+      },
+      imgSrc: {
+        type: String,
+        computed: '_computeImgSrc(correctAnswer)'
       },
       userAnswer: {
         type: String
@@ -114,11 +116,14 @@ class WhoseFlagApp extends PolymerElement {
     };
   }
 
-  _correctAnswerChanged(answer) {
-    if (answer && answer.code) {
-      // see https://www.webcomponents.org/element/PolymerElements/iron-image/elements/iron-image
-      this.$['flag-image'].preventLoad = false;
+  _computeImgSrc(correctAnswer) {
+    if (correctAnswer && correctAnswer.code) {
+      // Note: since this function will only run once this.correctAnswer is NOT undefined,
+      //       and we control the data so correctAnswer will always have a 'code' property
+      //       this function's body could just be this return statement:
+      return `data/svg/${correctAnswer.code}.svg`;
     }
+    return '';
   }
 
   _selectAnswer(event) {
