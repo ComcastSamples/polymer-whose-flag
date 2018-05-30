@@ -77,6 +77,7 @@ class WhoseFlagApp extends PolymerElement {
       <div id="flag-image-container">
         <iron-image
           id="flag-image"
+          prevent-load
           preload fade src="data/svg/[[correctAnswer.code]].svg">
         </iron-image>
         <div id="answer-button-container">
@@ -101,7 +102,8 @@ class WhoseFlagApp extends PolymerElement {
         value: ""
       },
       correctAnswer: {
-        type: Object
+        type: Object,
+        observer: '_correctAnswerChanged'
       },
       userAnswer: {
         type: String
@@ -110,6 +112,13 @@ class WhoseFlagApp extends PolymerElement {
         type: Object
       }
     };
+  }
+
+  _correctAnswerChanged(answer) {
+    if (answer && answer.code) {
+      // see https://www.webcomponents.org/element/PolymerElements/iron-image/elements/iron-image
+      this.$['flag-image'].preventLoad = false;
+    }
   }
 
   _selectAnswer(event) {
