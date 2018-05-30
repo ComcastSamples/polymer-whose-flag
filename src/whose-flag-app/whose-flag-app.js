@@ -3,6 +3,7 @@ import '@polymer/app-layout/app-layout.js';
 import '@polymer/iron-image/iron-image.js';
 import '@polymer/paper-button/paper-button.js';
 import '@polymer/paper-styles/color.js';
+import '@polymer/iron-ajax/iron-ajax.js';
 
 /**
  * @customElement
@@ -60,14 +61,19 @@ class WhoseFlagApp extends PolymerElement {
           <div main-title>Whose flag is this?</div>
         </app-toolbar>
       </app-header>
+      <iron-ajax
+        auto
+        url="data/countrycodes.json"
+        handle-as="json"
+        on-response="_handleResponse"></iron-ajax>
       <div id="flag-image-container">
         <iron-image
           id="flag-image"
-          preload fade src="data/svg/BR.svg">
+          preload fade src="data/svg/[[correctAnswer.code]].svg">
         </iron-image>
         <div id="answer-button-container">
-          <paper-button id="optionA" class="answer" on-click="_selectAnswer">[[countryA]]</paper-button>
-          <paper-button id="optionB" class="answer" on-click="_selectAnswer">[[countryB]]</paper-button>
+          <paper-button id="optionA" class="answer" on-click="_selectAnswer">[[countryA.name]]</paper-button>
+          <paper-button id="optionB" class="answer" on-click="_selectAnswer">[[countryB.name]]</paper-button>
         </div>
         <p>[[outputMessage]]</p>
         <paper-button class="another" id="another">Another!</paper-button>
@@ -77,24 +83,23 @@ class WhoseFlagApp extends PolymerElement {
   static get properties() {
     return {
       countryA: {
-        type: String,
-        value: "Brazil"
+        type: Object
       },
       countryB: {
-        type: String,
-        value: "Uruguay"
+        type: Object
       },
       outputMessage: {
         type: String,
         value: ""
       },
       correctAnswer: {
-        type: String,
-        value: "Brazil"
+        type: Object
       },
       userAnswer: {
-        type: String,
-        value: "Brazil"
+        type: String
+      },
+      countryList: {
+        type: Object
       }
     };
   }
@@ -102,12 +107,19 @@ class WhoseFlagApp extends PolymerElement {
   _selectAnswer(event) {
     let clickedButton = event.target;
     this.userAnswer = clickedButton.textContent;
-    if (this.userAnswer == this.correctAnswer) {
+    if (this.userAnswer == this.correctAnswer.name) {
       this.outputMessage = `${this.userAnswer} is correct!`;
     }
     else {
-      this.outputMessage = `Nope! The correct answer is ${this.correctAnswer}!`;
+      this.outputMessage = `Nope! The correct answer is ${this.correctAnswer.name}!`;
     }
+  }
+
+  _handleResponse(event) {
+    this.countryList = event.detail.response.countrycodes;
+    this.countryA = this.countryList[0];
+    this.countryB = this.countryList[1];
+    this.correctAnswer = this.countryA;
   }
 }
 
