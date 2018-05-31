@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Build and Deploy a Polymer 2.0 App From Scratch</title>
+  <title>Build and Deploy a Polymer 3.0 App From Scratch</title>
   <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
   <link rel="import" href="elements/codelab.html">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
@@ -18,13 +18,13 @@
 </head>
 <body unresolved class="fullbleed">
 
-  <google-codelab title="Build and Deploy a Polymer 2.0 App From Scratch"
+  <google-codelab title="Build and Deploy a Polymer 3.0 App From Scratch"
                   environment="web"
                   feedback-link="https://github.com/ComcastSamples/polymer-whose-flag/issues">
 
       <google-codelab-step label="Introduction" duration="0">
         <p>Polymer is a library that helps you create custom HTML elements. In this codelab, you&#39;ll build a web app with custom elements.</p>
-<aside class="special"><p>Looking for more information on what Polymer is? Check out the talks from the <a href="https://www.youtube.com/playlist?list=PLNYkxOF6rcICc687SxHQRuo9TVNOJelSZ" target="_blank">2016 Polymer Summit</a>.</p>
+<aside class="special"><p>Looking for more information on what Polymer is? Check out the coverage of <a href="https://www.polymer-project.org/blog/2018-05-09-polymer-at-io-2018" target="_blank">Polymer @ Google I/O 2018</a>.</p>
 </aside>
 <h2><strong>What you will build</strong></h2>
 <table>
@@ -91,14 +91,8 @@
 <p><code>npm -v</code></p>
 <p><img style="max-width: 624.00px" src="img/7c005028f5642e46.png"></p>
 <p>If you don&#39;t see version numbers for Node and npm, you may need to refer to the <a href="https://www.npmjs.com/get-npm" target="_blank">official installation instructions on the npm website</a>.</p>
-<h2><strong>Install Bower</strong></h2>
-<p>Bower is a package manager for the Web. Your Polymer project will rely on Bower to manage and track the Web Components it depends on, and their version information. </p>
-<p>After installing npm, you will be able to install Bower using npm.</p>
-<ol type="1" start="1">
-<li>Run the following command: <code>npm install -g bower</code></li>
-<li>Check that Bower is installed correctly: <code>bower -v</code></li>
-</ol>
-<p><img style="max-width: 624.00px" src="img/6c52150eb0bd53ba.png"></p>
+
+
 <h2><strong>Install the Polymer CLI</strong></h2>
 <p>The Polymer CLI is what you&#39;ll use to generate your app from a template, view the working app locally, and package it up ready for deployment.</p>
 <ol type="1" start="1">
@@ -116,43 +110,45 @@
           <h2><strong>Clone the project &amp; Install dependencies</strong></h2>
 
           <ol type="1" start="1">
-            <li>In your terminal, from the folder you hold your projects in, clone the <a href="https://github.com/ComcastSamples/polymer-whose-flag">Build a Polymer 2.0 App From Scratch Codelab</a>
+            <li>In your terminal, from the folder you hold your projects in, clone the <a href="https://github.com/ComcastSamples/polymer-whose-flag">Build a Polymer 3.0 App From Scratch Codelab</a>
               <pre><code>$ git clone https://github.com/ComcastSamples/polymer-whose-flag.git</code></pre></li>
             <li>Change into the directory you just cloned <pre><code>$ cd polymer-whose-flag</code></pre></li>
             <li>Initialize your Polymer app <pre><code>$ polymer init</code></pre></li>
 
-  <li>When prompted to choose the type of project you want to create, select <strong>Polymer 2.0 Application</strong>.</li>
+  <li>When prompted to choose the type of project you want to create, select <strong>Polymer 3.0 Application</strong>.</li>
   </ol>
-  <p><img style="max-width: 624.00px" src="img/f7ffe2a9449f799f.png"></p>
+  <p><img style="max-width: 624.00px" src="img/polymer-init.png"></p>
   <ol type="1" start="5">
   <li>Press <strong>Enter</strong> to accept the default application name and main element name supplied by the Polymer CLI: <code>whose-flag</code> and <code>whose-flag-app</code>.        </li>
   <li>When prompted for a description of your app, type: <code>Match flags to their countries!</code></li>
-  <li>Press <strong>Enter</strong>. When prompted with <pre><code>? Overwrite bower.json? (Ynaxdh)</code></pre> type <code>n</code> and press <strong>Enter</strong>.</li>
+  <li>Press <strong>Enter</strong>. When prompted with <pre><code>? Overwrite package.json? (Ynaxdh)</code></pre> type <code>n</code> and press <strong>Enter</strong>.</li>
 </ol>
-    <aside class="warning"><b>Note:</b> typically, you'll execute <code>$ polymer init</code> in a newly created, empty directory, so you won't be prompted to overwite bower.json. For our workshop, we've prepopulated <code>bower.json</code> will all the dependencies you'll need, so you do not want to overwrite it. The <code>README.md</code> file can be overwritten in our case.</aside>
+    <aside class="warning"><b>Note:</b> typically, you'll execute <code>$ polymer init</code> in a newly created, empty directory, so you won't be prompted to overwite package.json. For our workshop, we've prepopulated <code>package.json</code> will all the dependencies you'll need, so you do not want to overwrite it. The <code>README.md</code> and <code>.gitignore</code> files can be overwritten in our case.</aside>
 
 <ol type="1" start="8">
     <li>When prompted with <pre><code>? Overwrite README.md? (Ynaxdh) </code></pre> type <code>Y</code> and press <strong>Enter</strong>.</li>
-    <li>The Polymer CLI creates the scaffolding for your app.</li>
-  </ol>
-  <p><img style="max-width: 624.00px" src="img/6975cf2151939f6b.png"></p>
+    <li>The Polymer CLI creates the scaffolding for your app. You may see warnings such as these:
 
+      <p><img style="max-width: 624.00px" src="img/polymer-cli-bug.png"></p>
+      <p>The Polymer team <a href="https://github.com/Polymer/tools/issues/418" target="_blank">is aware</a> of them, and those warnings won't prevent you from working on this Codelab.</p>
+
+    </li>
+  </ol>
 
 <ol type="1" start="10">
-<li>Type <code>ls</code> and have a look at the file structure Polymer CLI has set up for you. You should see something like this:</li>
+<li>Type <code>ls</code> and have a look at the file structure Polymer CLI has set up for you.</li>
 </ol>
-<p><img style="max-width: 624.00px" src="img/a68f46b93492d612.png"></p>
 <h2><strong>What is all this stuff?</strong></h2>
 <p>The Polymer CLI has generated the files and folders composing the basic structure of an app. Here&#39;s a short explanation of these files and folders:</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p><strong>File or folder</strong></p>
 </td><td colspan="1" rowspan="1"><p><strong>What&#39;s inside?</strong></p>
 </td></tr>
-<tr><td colspan="1" rowspan="1"><p><code>bower_components</code></p>
-</td><td colspan="1" rowspan="1"><p>Your app has a set of <em>dependencies</em> - chunks of code that it depends on to work. These dependencies are managed with <a href="https://bower.io" target="_blank">Bower</a>, a package manager, and stored in the <code>bower_components</code> folder.</p>
+<tr><td colspan="1" rowspan="1"><p><code>node_modules</code></p>
+</td><td colspan="1" rowspan="1"><p>Your app has a set of <em>dependencies</em> - chunks of code that it depends on to work. These dependencies are managed with <a href="https://www.npmjs.com/" target="_blank">npm</a>, a package manager, and stored in the <code>node_modules</code> folder.</p>
 </td></tr>
-<tr><td colspan="1" rowspan="1"><p><code>bower.json</code></p>
-</td><td colspan="1" rowspan="1"><p>Describes your app&#39;s dependencies to the package manager, Bower.</p>
+<tr><td colspan="1" rowspan="1"><p><code>package.json</code></p>
+</td><td colspan="1" rowspan="1"><p>Describes your app&#39;s dependencies to the package manager, npm.</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p><code>index.html</code></p>
 </td><td colspan="1" rowspan="1"><p>Your app&#39;s landing page.</p>
@@ -164,54 +160,53 @@
 </td><td colspan="1" rowspan="1"><p>README files usually describe how to install and use the app. Currently, yours contains some default content generated by the Polymer CLI.</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p><code>src/</code></p>
-</td><td colspan="1" rowspan="1"><p>Folder that stores the code we&#39;ll write for your app - html, javascript and css.</p>
+</td><td colspan="1" rowspan="1"><p>Folder that stores the code we&#39;ll write for your app</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p><code>test/</code></p>
-</td><td colspan="1" rowspan="1"><p>A placeholder folder for automated tests. You won&#39;t need this since you will test your app manually.</p>
+</td><td colspan="1" rowspan="1"><p>A placeholder folder for automated tests.</p>
 </td></tr>
 </table>
-<p>Let&#39;s take a look at <code>src/whose-flag-app/whose-flag-app.html</code>. Open this file in a text editor.</p>
-<h3><strong>whose-flag-app.html</strong></h3>
-<pre><code>&lt;link rel=&#34;import&#34; href=&#34;../../bower_components/polymer/polymer-element.html&#34;&gt;
 
- &lt;dom-module id=&#34;whose-flag-app&#34;&gt;
-   &lt;template&gt;
-     &lt;style&gt;
-       :host {
-         display: block;
-       }
-     &lt;/style&gt;
-     &lt;h2&gt;Hello [[prop1]]!&lt;/h2&gt;
-   &lt;/template&gt;
+<aside class="warning"><b>Note:</b> you may find that <code>src/_element/</code> and <code>test/_element/</code> folders were created with files inside of them. The creation of those is a <a href="https://github.com/Polymer/tools/issues/419" target="_blank">bug with the polymer CLI</a>, and you can safely delete those files and folders.</aside>
 
-   &lt;script&gt;
-     /**
-      * @customElement
-      * @polymer
-      */
-     class WhoseFlagApp extends Polymer.Element {
-       static get is() { return &#39;whose-flag-app&#39;; }
-       static get properties() {
-         return {
-           prop1: {
-             type: String,
-             value: &#39;whose-flag-app&#39;
-           }
-         };
-       }
-     }
+<p>Let&#39;s take a look at <code>src/whose-flag-app/whose-flag-app.js</code>. Open this file in a text editor.</p>
+<h3><strong>whose-flag-app.js</strong></h3>
+<pre><code>import {html, PolymerElement} from &#39;@polymer/polymer/polymer-element.js&#39;;
 
-     window.customElements.define(WhoseFlagApp.is, WhoseFlagApp);
-   &lt;/script&gt;
- &lt;/dom-module&gt;</code></pre>
+  /**
+   * @customElement
+   * @polymer
+   */
+  class WhoseFlagApp extends PolymerElement {
+    static get template() {
+      return html`
+        &lt;style&gt;
+          :host {
+            display: block;
+          }
+        &lt;/style&gt;
+        &lt;h2&gt;Hello [[prop1]]!&lt;/h2&gt;
+      `;
+    }
+    static get properties() {
+      return {
+        prop1: {
+          type: String,
+          value: &#39;whose-flag-app&#39;
+        }
+      };
+    }
+  }
+
+  window.customElements.define('whose-flag-app', WhoseFlagApp);</code></pre>
 <p>Here are some important things to note:</p>
 <ul>
-<li>The <code>&lt;template&gt;</code> block is where we define the visual elements of the page. We will work inside the <code>&lt;template&gt;</code> block, adding interface elements to construct the app.</li>
+<li>The <code>return html`...`</code> block is where we define the visual elements of the page. We will work inside the <code>return html`...`</code> block, adding interface elements to construct the app.</li>
 <li>The <code>&lt;style&gt;</code> block defines the look and feel of the interface elements in the <code>&lt;template&gt;</code> block. This is where we will put CSS rules that define styles.</li>
-<li>The <code>&lt;script&gt;</code> block contains code that defines your app and provides its functionality. This is also where we&#39;ll add things like methods that get called when the user clicks a button.</li>
+<li>The overall <code>class</code> block contains code that defines your app and provides its functionality. This is also where we&#39;ll add things like methods that get called when the user clicks a button.</li>
 <li><code>prop1</code> is a property. It is declared in the class definition for <code>WhoseFlagApp</code>:</li>
 </ul>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>static get properties() {
   return {
     prop1: {
@@ -243,38 +238,39 @@
 
 <h2><strong>Install the toolbar</strong></h2>
 <aside class="special"><p><strong>It's already done!</strong></p>
-  <p>In the interest of time (and to respect the unpredictable nature of Conference Wi-Fi), all dependencies you need for this codelab were included in the <code>bower.json</code> when you did a git clone of the project. If you wanted to use these elements in a new project, from the command line you would run<br><code>bower install COMPONENT_NAME_GOES_HERE --save</code><br>in your app&#39;s directory to install and save it as a dependency. So for example, the command you would run to install the app-layout collection which includes the toolbar we'll be using, you would run
-  <pre><code>bower install app-layout --save</code></pre> </p>
-  <p>And then in your <code>bower.json</code> you will see what the above command has done:</p>
-  <h3>bower.json</h3>
+  <p>In the interest of time (and to respect the unpredictable nature of Conference Wi-Fi), all dependencies you need for this codelab were included in the <code>package.json</code> when you did a git clone of the project. If you wanted to use these elements in a new project, from the command line you would run<br><code>npm install COMPONENT_NAME_GOES_HERE --save</code><br>in your app&#39;s directory to install and save it as a dependency. So for example, the command you would run to install the app-layout collection which includes the toolbar we'll be using, you would run
+  <pre><code>npm install @polymer/app-layout --save</code></pre> </p>
+  <p>And then in your <code>package.json</code> you will see what the above command has done:</p>
+  <h3>package.json</h3>
   <pre><code>...
 &#34;dependencies&#34;: {
-    &#34;polymer&#34;: &#34;Polymer/polymer#^2.0.0&#34;,
-    &#34;app-layout&#34;: &#34;^2.0.1&#34;
+    &#34;@polymer/polymer&#34;: &#34;^3.0.0&#34;,
+    &#34;@polymer/app-layout&#34;: &#34;^3.0.0-pre.18&#34;
   },
 ...</code></pre>
   </aside>
 
 <h2><strong>Use the toolbar</strong></h2>
 <ol type="1" start="1">
-<li>From <code>src/whose-flag-app</code>, open <code>whose-flag-app.html</code> in a text editor. The first line in this file is a link to another file:</li>
+<li>From <code>src/whose-flag-app</code>, open <code>whose-flag-app.js</code> in a text editor. The first line in this file is a link to another file:</li>
 </ol>
-<h3>whose-flag-app.html</h3>
-<pre><code>&lt;link rel=&#34;import&#34; href=&#34;../../bower_components/polymer/polymer-element.html&#34;&gt;</code></pre>
-<p>This is an HTML Import. It is like a library - an HTML file that contains elements and functions that you can use to build other elements. This line is here because you need the Polymer library in order to do Polymer things.</p>
+<h3>whose-flag-app.js</h3>
+<pre><code>import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';</code></pre>
+<p>This is an <a href="https://jakearchibald.com/2017/es-modules-in-browsers/" target="_blank">ES Module Import</a>. It is like a library - a JavaScript file that contains elements and functions that you can use to build other elements. This line is here because you need the <code>html</code> and <code>PolymerElement</code> functions from the Polymer library in order to do Polymer things.</p>
 <ol type="1" start="2">
-<li>Add the following line under the existing HTML Import:</li>
+<li>Add the following line under the existing ES Module Import:</li>
 </ol>
-<h3>whose-flag-app.html</h3>
-<pre><code>&lt;link rel=&#34;import&#34; href=&#34;../../bower_components/app-layout/app-layout.html&#34;&gt;</code></pre>
+<h3>whose-flag-app.js</h3>
+<pre><code>import '@polymer/app-layout/app-layout.js';</code></pre>
 <p>This tells Polymer that you&#39;re going to use the <code>app-layout</code> elements. Note that you don&#39;t need to import <code>&lt;app-toolbar&gt;</code> itself; we&#39;re importing the whole collection of <code>app-layout</code> elements.</p>
 <ol type="1" start="3">
-<li>Locate the following text in <code>whose-flag-app.html</code>:</li>
+<li>Locate the following text in <code>whose-flag-app.js</code>:</li>
 </ol>
-<h3>whose-flag<strong>-app.html</strong></h3>
+<h3>whose-flag<strong>-app.js</strong></h3>
 <pre><code>&lt;h2&gt;Hello [[prop1]]!&lt;/h2&gt;</code></pre>
 <p>This is just placeholder text, and you can safely delete it. Replace it with this:</p>
-<h3>whose-flag-app.html</h3>
+
+<h3>whose-flag-app.js</h3>
 <pre><code>&lt;app-header&gt;
    &lt;app-toolbar&gt;
      &lt;div main-title&gt;Whose flag is this?&lt;/div&gt;
@@ -282,22 +278,23 @@
  &lt;/app-header&gt;</code></pre>
 <p><strong>Points to note:</strong></p>
 <ul>
-<li>Adding custom elements to your code is that easy! Simply <strong>install</strong> and <strong>import</strong> them. Once that&#39;s done, you can drop them onto your page with HTML tags, just like you would with a standard <code>&lt;h1&gt;</code> or <code>&lt;input&gt;</code> element.</li>
+<li>Adding custom elements to your code is that easy! Simply <strong>install</strong> and <strong>import</strong> them. Once that&#39;s done, you can drop them onto your script with HTML tags inside the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates" target="_blank"><code>html</code> tagged template literal</a>, just like you would with a standard <code>&lt;h1&gt;</code> or <code>&lt;input&gt;</code> element.</li>
 <li>The <code>&lt;app-toolbar&gt;</code> element looks for a <code>main-title</code> div element in order to figure out how to format it.</li>
 </ul>
 <p>If you want a preview of your app at any time, you can run <code>polymer serve --open</code> from the <code>whose-flag</code> root project folder, using a command line. You can also leave the Polymer development server running--just remember to refresh your browser to see your changes.</p>
 <p>Your app should look like this:</p>
 <p><img style="max-width: 522.50px" src="img/d9e8fa3cd24f4134.png"></p>
 <p>In the following steps, we will add the rest of the user interface.</p>
+
 <h2><strong>Add an image</strong></h2>
 <ol type="1" start="1">
-<li><strong>Import </strong><code>&lt;iron-image&gt;</code> (which was preinstalled in your bower_components folder) by placing the following code after the existing import links in <code>whose-flag-app.html</code> (remember, <code>whose-flag-app.html</code> is in <code>src/whose-flag-app</code>).</li>
+<li><strong>Import </strong><code>&lt;iron-image&gt;</code> (which was preinstalled in your node_modules folder) by placing the following code after the existing import links in <code>whose-flag-app.js</code> (remember, <code>whose-flag-app.js</code> is in <code>src/whose-flag-app</code>).</li>
 </ol>
-<pre><code>&lt;link rel=&#34;import&#34; href=&#34;../../bower_components/iron-image/iron-image.html&#34;&gt;</code></pre>
+<pre><code>import '@polymer/iron-image/iron-image.js';</code></pre>
 <ol type="1" start="2">
-<li>Add the following code to <code>whose-flag-app.html</code>, after the <code>&lt;/app-header&gt;</code> close tag:</li>
+<li>Add the following code to <code>whose-flag-app.js</code>, after the <code>&lt;/app-header&gt;</code> close tag:</li>
 </ol>
-<h3><strong>whose-flag-app.html</strong></h3>
+<h3><strong>whose-flag-app.js</strong></h3>
 <pre><code>&lt;div id=&#34;flag-image-container&#34;&gt;
   &lt;iron-image
     id=&#34;flag-image&#34;
@@ -311,12 +308,12 @@
 <h2><strong>Add buttons</strong></h2>
 <p>Add three buttons to the simple app interface.</p>
 <ol type="1" start="1">
-<li>In <code>whose-flag-app.html</code>, import the <code>&lt;paper-button&gt;</code> element:</li>
+<li>In <code>whose-flag-app.js</code>, import the <code>&lt;paper-button&gt;</code> element:</li>
 </ol>
-<h3>whose-flag-app.html</h3>
-<pre><code>&lt;link rel=&#34;import&#34; href=&#34;../../bower_components/paper-button/paper-button.html&#34;&gt;</code></pre>
+<h3>whose-flag-app.js</h3>
+<pre><code>import '@polymer/paper-button/paper-button.js';</code></pre>
 <ol type="1" start="2">
-<li>Insert the following code straight after the closing <code>&lt;/iron-image&gt;</code> tag. We&#39;ll put these buttons inside the <code>&lt;</code><strong><code>div</code></strong><code> id=&#34;flag-image-container&#34;&gt; ...&lt;/div&gt;</code> block to make sure they align with the image.</li>
+<li>Insert the following code straight after the closing <code>&lt;/iron-image&gt;</code> tag. We&#39;ll put these buttons inside the <code>&lt;div id=&#34;flag-image-container&#34;&gt; ...&lt;/div&gt;</code> block to make sure they align with the image.</li>
 </ol>
 <pre><code>&lt;div id=&#34;answer-button-container&#34;&gt;
   &lt;paper-button id=&#34;optionA&#34; class=&#34;answer&#34;&gt;Brazil&lt;/paper-button&gt;
@@ -333,8 +330,8 @@
 
 
 <h2><strong>Delete placeholder code</strong></h2>
-<p>In the <code>&lt;script&gt;&lt;/script&gt;</code> block, locate the following code, and delete it:</p>
-<h3><strong>whose-flag-app.html</strong></h3>
+<p>In the <code>static get properties() {...}</code> block, locate the following code, and delete it:</p>
+<h3><strong>whose-flag-app.js</strong></h3>
 <pre><code>prop1: {
   type: String,
   value: &#39;whose-flag-app&#39;
@@ -343,7 +340,7 @@
 
 
 
-<p><a href="https://github.com/ComcastSamples/polymer-whose-flag/tree/51d35d92bf50dcf9115e1fd49096c1a2b92e9ddd" target="_blank">Click here to see what your project should look like at the end of this step</a>.</p>
+<p><a href="https://github.com/ComcastSamples/polymer-whose-flag/tree/46aa7d4a5b75d7b78ef44560fc2e3d7d287c5e8c" target="_blank">Click here to see what your project should look like at the end of this step</a>.</p>
 <p><a href="https://whose-flag-end-of-step-5.firebaseapp.com/" target="_blank">Here&#39;s a demo of the app at this stage</a>.</p>
 
 
@@ -352,14 +349,14 @@
       <google-codelab-step label="Style your app" duration="0">
         <p>Let&#39;s give your app some style. You will use an existing color scheme found in the <code>&lt;paper-styles&gt;</code> component, which provides an easy implementation of material design.</p>
 <ol type="1" start="1">
-<li>Import the color scheme inside <code>paper-styles</code> by adding the following code to the list of imports at the start of <code>whose-flag-app.html</code>: </li>
+<li>Import the color scheme inside <code>paper-styles</code> by adding the following code to the list of imports at the start of <code>whose-flag-app.js</code>: </li>
 </ol>
-<h3><strong>whose-flag-app.html</strong></h3>
-<pre>&lt;link rel=&#34;import&#34; href=&#34;../../bower_components/paper-styles/color.html&#34;&gt;</pre>
+<h3><strong>whose-flag-app.js</strong></h3>
+<pre>import '@polymer/paper-styles/color.js';</pre>
 <ol type="1" start="2">
 <li>Replace the existing <code>&lt;style&gt;&lt;/style&gt;</code> block with the following code:</li>
 </ol>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>    &lt;style&gt;
       :host {
         display: block;
@@ -406,7 +403,7 @@
     &lt;/style&gt;
 </code></pre>
 <ul>
-<li>The CSS you put inside an element&#39;s <code>&lt;template&gt;</code> definition is <strong>scoped</strong> to that element. This means that it will only apply inside that element - the rest of the page won&#39;t know anything about it.</li>
+<li>The CSS you put inside an element&#39;s <code>html`...`</code> tagged template literal definition is <strong>scoped</strong> to that element. This means that it will only apply inside that element - the rest of the page won&#39;t know anything about it.</li>
 <li>However, you also want to be able to define a consistent style for the app itself. That&#39;s where the <code>:host</code> selector comes in. The <code>:host</code> selector allows you to style the web component itself. In this case, you use it to define a font choice for the whole app.</li>
 <li>We also use custom properties to define other style attributes. For example, we did this in the CSS code above:</li>
 </ul>
@@ -417,7 +414,7 @@
 <p>The code extract above takes <code>--paper-light-blue-500</code> and assigns it to act as the value of the background color for <code>paper-buttons</code> of class <code>another</code> when they are being hovered over.</p>
 <p>Remember that you can serve and test your app at any time by typing the following command from the root <code>whose-flag</code> project folder:  </p>
 <pre>polymer serve --open</pre>
-<p><a href="https://github.com/ComcastSamples/polymer-whose-flag/blob/0b2d3964b621f3b79eeee8d0ec6981a48502986e/src/whose-flag-app/whose-flag-app.html" target="_blank">Go here to see what your project code should look like now.</a></p>
+<p><a href="https://github.com/ComcastSamples/polymer-whose-flag/blob/2f66f6c79b89852e6d9b19af55384d367e9f7e90/src/whose-flag-app/whose-flag-app.js" target="_blank">Go here to see what your project code should look like now.</a></p>
 <p><a href="https://whose-flag-end-of-step-6.firebaseapp.com/" target="_blank">Here&#39;s a demo of the app at this stage</a>.</p>
 
 
@@ -426,7 +423,7 @@
       <google-codelab-step label="Set up data bindings" duration="0">
         <p>The text of your buttons is currently hard-coded. You need to change this so that you can display the button text from a data source. To do this, you will bind the text of your buttons to properties of your <code>whose-flag-app</code> element.</p>
 <p>At the moment, <code>whose-flag-app</code> has no properties:</p>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>  static get properties() {
     return {
     };
@@ -434,7 +431,7 @@
 <ol type="1" start="1">
 <li>  Add two properties to <code>whose-flag-app</code>: </li>
 </ol>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>  static get properties() {
     return {
       countryA: {
@@ -449,20 +446,20 @@
   }</code></pre>
 <p>Their values remain hard-coded for now. Now, you can bind the button text to these properties.</p>
 <ol type="1" start="2">
-<li> Find the following lines in <code>whose-flag-app.html</code>:</li>
+<li> Find the following lines in <code>whose-flag-app.js</code>:</li>
 </ol>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>  &lt;paper-button id=&#34;optionA&#34; class=&#34;answer&#34;&gt;Brazil&lt;/paper-button&gt;
   &lt;paper-button id=&#34;optionB&#34; class=&#34;answer&#34;&gt;Uruguay&lt;/paper-button&gt;</code></pre>
 <p>Replace the hard-coded button text with data bindings:</p>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>  &lt;paper-button id=&#34;optionA&#34; class=&#34;answer&#34;&gt;[[countryA]]&lt;/paper-button&gt;
   &lt;paper-button id=&#34;optionB&#34; class=&#34;answer&#34;&gt;[[countryB]]&lt;/paper-button&gt;</code></pre>
 <p>This syntax is called data binding. <code>[[countryA]]</code> will be replaced by the value of <code>this.countryA</code> from your element. <code>[[countryB]]</code> will be replaced by the value of <code>this.countryB</code>.</p>
 <ol type="1" start="3">
 <li>Create another property called <code>outputMessage</code>:</li>
 </ol>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>    static get properties() {
     return {
       countryA: {
@@ -482,15 +479,15 @@
 <ol type="1" start="4">
 <li>Locate the following placeholder text:</li>
 </ol>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>  &lt;p&gt;A message will go here, telling you if you got it right.&lt;/p&gt;</code></pre>
 <p>  Replace it with a data binding:</p>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>  &lt;p&gt;[[outputMessage]]&lt;/p&gt;</code></pre>
 <ol type="1" start="5">
 <li>Add a property to hold the correct answer, and a property to hold the user&#39;s answer. In the <code>properties</code> function, after the definition of <code>outputMessage</code>, create two more properties:</li>
 </ol>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>  correctAnswer: {
     type: String,
     value: &#34;Brazil&#34;
@@ -504,7 +501,7 @@
 <ol type="1" start="6">
 <li>  Add the following function to the class definition of <code>WhoseFlagApp</code>:</li>
 </ol>
-<h3><strong>whose-flag-app.html</strong></h3>
+<h3><strong>whose-flag-app.js</strong></h3>
 <pre><code>_selectAnswer(event) {
   let clickedButton = event.target;
   this.userAnswer = clickedButton.textContent;
@@ -519,7 +516,6 @@
 <pre><code>  &lt;script&gt;
     ...
     class WhoseFlagApp extends Polymer.Element {
-      static get is() { return &#39;whose-flag-app&#39;; }
       static get properties() {
         return {
           ...
@@ -536,7 +532,7 @@
 <ol type="1" start="7">
 <li> Add <code>on-click=&#34;_selectAnswer&#34;</code> to the attributes of each answer button:</li>
 </ol>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>&lt;paper-button id=&#34;optionA&#34; class=&#34;answer&#34; on-click=&#34;_selectAnswer&#34;&gt;[[countryA]]&lt;/paper-button&gt;
 &lt;paper-button id=&#34;optionB&#34; class=&#34;answer&#34; on-click=&#34;_selectAnswer&#34;&gt;[[countryB]]&lt;/paper-button&gt;</code></pre>
 <p> Notes:</p>
@@ -546,7 +542,7 @@
 <li>We store the details of the event in a variable, like so: <code>var clickedButton = event.target;</code></li>
 <li>We access the country name attached to the button by extracting its <code>textContent</code>, like so: <code>this.userAnswer = clickedButton.textContent;</code></li>
 </ul>
-<p><a href="https://github.com/ComcastSamples/polymer-whose-flag/blob/0d782a6439134427f437bf91fefec713079a3e52/src/whose-flag-app/whose-flag-app.html" target="_blank">Click here to see what your project code should look like now</a>.</p>
+<p><a href="https://github.com/ComcastSamples/polymer-whose-flag/blob/98af7132cd7ef5a3e669356eb3946edb0bb1cef9/src/whose-flag-app/whose-flag-app.js" target="_blank">Click here to see what your project code should look like now</a>.</p>
 <p><a href="https://whose-flag-end-of-step-7.firebaseapp.com/" target="_blank">Here&#39;s a demo of the app at this stage</a>.</p>
 
 
@@ -579,15 +575,15 @@
 <h2><strong>Use &lt;iron-ajax&gt; to load countrycodes.json</strong></h2>
 <p>Instead of hardcoding the country names and flag image filename, you&#39;ll take these values from <code>countrycodes.json</code>. Loading this file is simple--you can use a Polymer component called <code>&lt;iron-ajax&gt;</code>. </p>
 <ol type="1" start="1">
-<li>Import <code>&lt;iron-ajax&gt;</code> by adding the following line to the imports section in <code>whose-flag-app.html</code>:</li>
+<li>Import <code>&lt;iron-ajax&gt;</code> by adding the following line to the imports section in <code>whose-flag-app.js</code>:</li>
 </ol>
-<p><strong>whose-flag-app.html</strong></p>
-<pre><code>&lt;link rel=&#34;import&#34; href=&#34;../../bower_components/iron-ajax/iron-ajax.html&#34;&gt;</code></pre>
+<p><strong>whose-flag-app.js</strong></p>
+<pre><code>import '@polymer/iron-ajax/iron-ajax.js';</code></pre>
 <p>Now we can use &lt;iron-ajax&gt; to load the file. </p>
 <ol type="1" start="2">
-<li>Locate the following piece of code inside whose-flag-app.html:</li>
+<li>Locate the following piece of code inside whose-flag-app.js:</li>
 </ol>
-<h3><strong>whose-flag-app.html</strong></h3>
+<h3><strong>whose-flag-app.js</strong></h3>
 <pre><code>    &lt;app-header&gt;
      &lt;app-toolbar&gt;
        &lt;div main-title&gt;Whose flag is this?&lt;/div&gt;
@@ -602,14 +598,14 @@
 <ol type="1" start="3">
 <li>Insert the following block of code between <code>&lt;/app-header&gt;</code> and <code>&lt;div id=&#34;flag-image-container&#34;&gt;</code>:</li>
 </ol>
-<p><strong>whose-flag-app.html</strong></p>
+<p><strong>whose-flag-app.js</strong></p>
 <pre><code>&lt;iron-ajax
   auto
   url=&#34;data/countrycodes.json&#34;
   handle-as=&#34;json&#34;
   on-response=&#34;_handleResponse&#34;&gt;&lt;/iron-ajax&gt;</code></pre>
 <p>Your code should look like this:</p>
-<p><strong>whose-flag-app.html</strong></p>
+<p><strong>whose-flag-app.js</strong></p>
 <pre><code>&lt;app-header&gt;
   &lt;app-toolbar&gt;
     &lt;div main-title&gt;Whose flag is this?&lt;/div&gt;
@@ -637,7 +633,7 @@
 <ol type="1" start="1">
 <li>Inside the <code>properties</code> function, add a property called <code>countryList</code>:</li>
 </ol>
-<p><strong>whose-flag-app.html</strong></p>
+<p><strong>whose-flag-app.js</strong></p>
 <pre><code>static get properties() {
   return {
     countryA: {
@@ -673,7 +669,7 @@
 <ol type="1" start="2">
 <li>Place the following code inside the class definition for <code>WhoseFlagApp</code>:</li>
 </ol>
-<h3><strong>whose-flag-app.html</strong></h3>
+<h3><strong>whose-flag-app.js</strong></h3>
 <pre><code>_handleResponse(event) {
   this.countryList = event.detail.response.countrycodes;
   this.countryA = this.countryList[0];
@@ -692,13 +688,13 @@
 <ol type="1" start="1">
 <li>Find the following code:</li>
 </ol>
-<p><strong>whose-flag-app.html</strong></p>
+<p><strong>whose-flag-app.js</strong></p>
 <pre><code>&lt;div id=&#34;answer-button-container&#34;&gt;
   &lt;paper-button class=&#34;answer&#34; id=&#34;optionA&#34; on-click=&#34;_selectAnswer&#34;&gt;[[countryA]]&lt;/paper-button&gt;
   &lt;paper-button class=&#34;answer&#34; id=&#34;optionB&#34; on-click=&#34;_selectAnswer&#34;&gt;[[countryB]]&lt;/paper-button&gt;
 &lt;/div&gt;</code></pre>
 <p>Replace it with the following code:</p>
-<p><strong>whose-flag-app.html</strong></p>
+<p><strong>whose-flag-app.js</strong></p>
 <pre><code>&lt;div id=&#34;answer-button-container&#34;&gt;
   &lt;paper-button class=&#34;answer&#34; id=&#34;optionA&#34; on-click=&#34;_selectAnswer&#34;&gt;[[countryA.name]]&lt;/paper-button&gt;
   &lt;paper-button class=&#34;answer&#34; id=&#34;optionB&#34; on-click=&#34;_selectAnswer&#34;&gt;[[countryB.name]]&lt;/paper-button&gt;
@@ -707,7 +703,7 @@
 <ol type="1" start="2">
 <li>Change the properties section of your code to look like this:</li>
 </ol>
-<h3><strong>whose-flag-app.html</strong></h3>
+<h3><strong>whose-flag-app.js</strong></h3>
 <pre><code>     static get properties() {
        return {
          countryA: {
@@ -735,7 +731,7 @@
 <ol type="1" start="3">
 <li>Since <code>correctAnswer</code> is now an <code>Object</code> with <code>name</code> and <code>code</code> fields, instead of a <code>String</code>, update <code>_selectAnswer</code> to accommodate this:</li>
 </ol>
-<h3><strong>whose-flag-app.html</strong></h3>
+<h3><strong>whose-flag-app.js</strong></h3>
 <pre><code>     _selectAnswer(event) {
        let clickedButton = event.target;
        this.userAnswer = clickedButton.textContent;
@@ -749,18 +745,18 @@
 <ol type="1" start="4">
 <li>Finally, replace the hard-coded filename with a reference to the data loaded from <code>countrycodes.json</code>. Find the following code:</li>
 </ol>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>&lt;iron-image
   id=&#34;flag-image&#34;
   preload fade src=&#34;data/svg/BR.svg&#34;&gt;
 &lt;/iron-image&gt;</code></pre>
 <p>Change it to the following code:</p>
-<p><strong>whose-flag-app.html</strong></p>
+<p><strong>whose-flag-app.js</strong></p>
 <pre><code>  &lt;iron-image
      id=&#34;flag-image&#34;
      preload fade src=&#34;data/svg/[[correctAnswer.code]].svg&#34;&gt;
   &lt;/iron-image&gt;</code></pre>
-<p><a href="https://github.com/ComcastSamples/polymer-whose-flag/blob/0166f8ff5c1a864de13f917962f0d3804cea9f2a/src/whose-flag-app/whose-flag-app.html" target="_blank">Click here to see what your project should look like now</a>.</p>
+<p><a href="https://github.com/ComcastSamples/polymer-whose-flag/blob/4e737c0f4dcefb7b8d94237e933a782103868d69/src/whose-flag-app/whose-flag-app.js" target="_blank">Click here to see what your project should look like now</a>.</p>
 <p><a href="https://whose-flag-end-of-step-8.firebaseapp.com/" target="_blank">Here&#39;s a demo of the app at this stage</a>.</p>
 
 
@@ -769,7 +765,7 @@
       <google-codelab-step label="Randomize the country options" duration="0">
         <p>In this step, we make the game dynamic and playable. </p>
 <p>Here&#39;s the existing code for selecting the countries to be displayed:</p>
-<h3>whose-flag<strong>-app.html</strong></h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>_handleResponse(event) {
   this.countryList = event.detail.response.countrycodes;
   this.countryA = this.countryList[0];
@@ -783,19 +779,11 @@
   return Math.floor(Math.random() * (this.countryList.length));
 }</code></pre>
 <ol type="1" start="1">
-<li>Place the new function in <code>whose-flag-app.html</code>, inside the class definition for <code>WhoseFlagApp:</code></li>
+<li>Place the new function in <code>whose-flag-app.js</code>, inside the class definition for <code>WhoseFlagApp:</code></li>
 </ol>
-<h3>whose-flag-app.html</h3>
-<pre><code>&lt;link rel=&#34;import&#34; href=&#34;../../bower_components/polymer/polymer-element.html&#34;&gt;
-...
+<h3>whose-flag-app.js</h3>
+<pre><code>...
 
-&lt;dom-module id=&#34;whose-flag-app&#34;&gt;
-  &lt;template&gt;
-    ...
-  &lt;/template&gt;
-
-  &lt;script&gt;
-    ...
     class WhoseFlagApp extends Polymer.Element {
       ...
       _handleResponse(event) {
@@ -808,13 +796,11 @@
         return Math.floor(Math.random() * (this.countryList.length));
       }
     }
-    window.customElements.define(WhoseFlagApp.is, WhoseFlagApp);
-  &lt;/script&gt;
-&lt;/dom-module&gt;</code></pre>
+   ...</code></pre>
 <ol type="1" start="2">
 <li>Use <code>__getRandomCountry</code>, instead of hard-coded integers, as an array index for <code>this.countryList</code>:</li>
 </ol>
-<h3>whose-flag-app.html</h3>
+<h3>whose-flag-app.js</h3>
 <pre><code>this.countryA = this.countryList[this.__getRandomCountry()];
 this.countryB = this.countryList[this.__getRandomCountry()];</code></pre>
 <p>Modify your code to make sure that <code>countryA</code> and <code>countryB</code> are always different from each other. </p>
@@ -846,7 +832,7 @@ this.correctAnswer = coin == 1 ? this.countryA : this.countryB;</code></pre>
 <li>Hook up the <code>_restart</code> function to the <strong>Another!</strong> button:</li>
 </ol>
 <pre><code>&lt;paper-button class=&#34;another&#34; id=&#34;another&#34; on-click=&#34;_restart&#34;&gt;Another!&lt;/paper-button&gt;</code></pre>
-<p><a href="https://github.com/ComcastSamples/polymer-whose-flag/blob/174453ca88455b89bed1673b2d6703871503c653/src/whose-flag-app/whose-flag-app.html" target="_blank">Click here to see what your project should look like now</a>. </p>
+<p><a href="https://github.com/ComcastSamples/polymer-whose-flag/blob/9af3b37b0f6e85add74b71911500b66e30a8a235/src/whose-flag-app/whose-flag-app.js" target="_blank">Click here to see what your project should look like now</a>. </p>
 <p><a href="https://whose-flag.firebaseapp.com/" target="_blank">Here&#39;s a demo of the finished app!</a></p>
 
 </google-codelab-step>
@@ -885,10 +871,7 @@ this.correctAnswer = coin == 1 ? this.countryA : this.countryB;</code></pre>
 <p>Note: If you already have a <code>polymer.json</code> file in your project folder, delete its contents and replace them with the code sample above.</p>
 <ol type="1" start="3">
 <li>Type <code>polymer build</code>.</li>
-</ol>
-<p>To see what polymer build has done, let&#39;s examine the folder structure again. This is what we had before:</p>
-<p><img style="max-width: 624.00px" src="img/a68f46b93492d612.png"></p>
-<ol type="1" start="3">
+
 <li>In the main <code>/whose-flag/</code> folder, type <code>ls</code> to see the changes:</li>
 </ol>
 <p><img style="max-width: 624.00px" src="img/bc70e2edf04a0a8f.png"><br></p>
